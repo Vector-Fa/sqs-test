@@ -1,7 +1,7 @@
 from fastapi import APIRouter, BackgroundTasks
 
 from celery_app import celery_app, queue_name
-from email_client import send_email
+from email_client import send_email, send_email_aio
 
 router = APIRouter()
 
@@ -20,8 +20,19 @@ async def send_email_task(background_task: BackgroundTasks):
     return {'message': 'done'}
 
 
+@router.post('/email/aioboto')
+async def send_email_aioboto():
+    await send_email_aio('test')
+    return {'message': 'done'}
+
+
 @router.post('/email/celery')
 async def send_email_celery():
     celery_app.send_task(queue_name, args=(1, 2, 3,))
     # celery_app.signature(queue_name, args=(1, 2, 3,)).apply_async()
     return {'message': 'done'}
+
+
+@router.get('/test')
+async def test():
+    return {'message': True}
