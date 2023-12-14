@@ -13,7 +13,7 @@ queue_url = 'https://sqs.eu-west-1.amazonaws.com/612190425465/Mock_EmailSender'
 
 
 def send_email(args):
-    pass
+    time.sleep(2)
     response = sqs.send_message(
         QueueUrl=queue_url,
         MessageBody=(

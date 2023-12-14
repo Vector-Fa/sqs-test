@@ -20,13 +20,6 @@ async def send_email_task(background_task: BackgroundTasks):
     return {'message': 'done'}
 
 
-@router.post('/email/aioboto')
-async def send_email_aioboto(background_task: BackgroundTasks):
-    return {'message': 'done'}
-
-
-
-
 @router.post('/email/celery')
 async def send_email_celery():
     celery_app.send_task(queue_name, args=(1, 2, 3,))
