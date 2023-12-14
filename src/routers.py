@@ -7,7 +7,7 @@ router = APIRouter()
 
 
 @router.post('/email/raw')
-async def send_email_raw(background_task: BackgroundTasks):
+async def send_email_raw():
     send_email(
         ('email', 12)
     )
